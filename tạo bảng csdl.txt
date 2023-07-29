@@ -1,0 +1,22 @@
+Bảng "Users" (Người dùng):
+
+user_id (PRIMARY KEY): Mã duy nhất để xác định người dùng.
+username: Tên đăng nhập của người dùng.
+email: Địa chỉ email của người dùng.
+password: Mật khẩu được mã hóa của người dùng.
+Bảng "Posts" (Bài viết):
+
+post_id (PRIMARY KEY): Mã duy nhất để xác định bài viết.
+title: Tiêu đề của bài viết.
+meta: Mô tả ngắn
+content: Nội dung của bài viết.
+image: hình ảnh
+date_posted: Ngày đăng bài viết.
+user_id (FOREIGN KEY): Liên kết với bảng Users để xác định người đăng bài viết.
+Bảng "Comments" (Bình luận):
+
+comment_id (PRIMARY KEY): Mã duy nhất để xác định bình luận.
+text: Nội dung của bình luận.
+date_commented: Ngày bình luận.
+user_id (FOREIGN KEY): Liên kết với bảng Users để xác định người viết bình luận.
+post_id (FOREIGN KEY): Liên kết với bảng Posts để xác định bình luận thuộc bài viết nào.
