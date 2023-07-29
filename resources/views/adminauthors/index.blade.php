@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col col-md-10"><b>Danh sách tác giả</b></div>
             <div class="col col-md-2">
-                <a href="#" class="btn btn-success float-end">Thêm Tác Giả</a>
+                <a href="{{ route('adminauthors.create')}}" class="btn btn-success float-end">Thêm Tác Giả</a>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
                 <td>{{ $row->email }}</td>
                 <td>
                     <a href="{{ route('adminauthors.confirm', $row->author_id) }}" class="btn btn-danger btn-sm">Xóa</a>
-                    <a href="#" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="{{ route('adminauthors.check', $row->author_id) }}" class="btn btn-warning btn-sm">Sửa</a>
                 </td>
             </tr>
 

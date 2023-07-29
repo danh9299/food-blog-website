@@ -59,6 +59,7 @@ Route::middleware([
     Route::resource('admin/dashboard/adminauthors', AuthorController::class);
     Route::get('admin/dashboard/adminauthors/{author}/confirm', [AuthorController::class, 'confirmDelete'])->name('adminauthors.confirm');
     Route::delete('admin/dashboard/adminauthors/{author}/confirmDelete', [AuthorController::class, 'destroy'])->name('adminauthors.destroy');
-
+    Route::get('admin/dashboard/adminauthors/{author}/check', [AuthorController::class, 'check'])->name('adminauthors.check');
+    Route::put('admin/dashboard/adminauthors/{author}/update', [AuthorController::class, 'update'])->name('adminauthors.update');
 });
 

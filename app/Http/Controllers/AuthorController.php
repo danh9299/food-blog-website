@@ -27,6 +27,7 @@ class AuthorController extends Controller
     public function create()
     {
         //
+        return view('adminauthors.create');
     }
 
     /**
@@ -35,6 +36,18 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+        
+         
+            'username' => 'required',
+            'email' => 'required',
+        ]);
+        $author = new Author;
+        $author->author_id = $request->author_id;
+        $author->username = $request->username;
+        $author->email = $request->email;
+        $author->save();
+        return redirect()->route('adminauthors.index')->with('success','Thêm mới tác giả thành công');
     }
 
     /**
@@ -50,7 +63,17 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
+        //somehow this function does return information of authors to the view. 
+        //So i create a new check view and check() function below. It works
+       
+      
+    }
+    // Show the form to edit info of author
+    public function check(Author $author)
+    {
         //
+       
+        return view('adminauthors.check', compact('author'));
     }
 
     /**
@@ -59,6 +82,24 @@ class AuthorController extends Controller
     public function update(Request $request, Author $author)
     {
         //
+        $request->validate([
+        
+            'author_id' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            
+        ]);
+
+        $author = Author::find($request->hidden_id);
+        $author->author_id = $request->author_id;
+        $author->username = $request->username;
+        $author->email = $request->email;
+      
+        $author->save();
+
+        // Chuyển hướng về trang danh sách tạp chí
+        return redirect()->route('adminauthors.index')->with('success', 'Cập nhật tác giả thành công');
+
     }
 
     /**

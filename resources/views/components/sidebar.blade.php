@@ -21,7 +21,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item bg-light h4">Quản Lý Tác Giả</li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('adminauthors.index') }}">Xem danh sách tác giả</a></li>
-                <li class="list-group-item bg-light">Thêm tác giả mới</li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('adminauthors.create') }}">Thêm tác giả mới</a></li>
             </ul>
             <hr>
         </li>
