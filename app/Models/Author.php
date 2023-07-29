@@ -9,7 +9,7 @@ class Author extends Model
 {
     use HasFactory;
     protected $primaryKey = 'author_id';
-    protected $fillable = ['username', 'email', 'password'];
+    protected $fillable = ['username', 'email'];
 
     // Quan hệ 1-n: Một người dùng có thể có nhiều bài viết
     public function posts()

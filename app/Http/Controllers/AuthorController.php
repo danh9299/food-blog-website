@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Post;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -13,6 +13,12 @@ class AuthorController extends Controller
     public function index()
     {
         //
+        $authors = Author::all();
+        
+        // Truy xuất thông tin tác giả của bài viết
+       
+       return view('adminauthors.index', ['authors' => $authors]);
+  
     }
 
     /**
@@ -58,8 +64,18 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function confirmDelete(Author $author)
+    {
+        return view('adminauthors.confirm', compact('author'));
+    }
     public function destroy(Author $author)
     {
         //
+        Post::where('author_id', $author->author_id)->update(['author_id' => 0]);
+        $author->delete();
+        return redirect()->route('adminauthors.index')->with('success', 'Xóa tác giả thành công');
+       
+     
     }
+   
 }

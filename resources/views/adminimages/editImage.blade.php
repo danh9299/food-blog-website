@@ -22,9 +22,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-            
                 <img src="{{asset('assets/images/'.$image->image_name)}}" style=" width:300px; height:300px"/>
-         
             </div>
             <p>Xác nhận sửa ảnh?</p>
             <button type="submit" class="btn btn-danger">Có</button>

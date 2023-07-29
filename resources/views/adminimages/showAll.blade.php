@@ -1,8 +1,5 @@
 @extends('dashboard')
-
 @section('content')
-
-
 @if($message = Session::get('success'))
 
 <div class="alert alert-success">
@@ -10,7 +7,6 @@
 </div>
 
 @endif
-
 <div class="card mt-5">
     <div class="card-header">
         <div class="row">
@@ -26,39 +22,28 @@
                 <th>Mã ảnh</th>
                 <th>Hình ảnh</th>
                 <th>Tên file</th>
-             
             </tr>
             @if(count($images) > 0)
-
             @foreach($images as $row)
-
             <tr>
                 <td>{{ $row->id }}</td>
-                <td><img src="{{asset('assets/images/'.$row->image_name)}}" width="80" height="80" class="img-cover"/></td>
+                <td><img src="{{asset('assets/images/'.$row->image_name)}}" width="80" height="80" class="img-cover" />
+                </td>
                 <td>{{ $row->image_name }}</td>
-               
-
                 <td>
-                    <a href="{{ route('adminimages.confirmDeleteImage', $row->id) }}" class="btn btn-danger btn-sm">Xóa</a>
+                    <a href="{{ route('adminimages.confirmDeleteImage', $row->id) }}"
+                        class="btn btn-danger btn-sm">Xóa</a>
                     <a href="{{ route('adminimages.showImage', $row->id) }}" class="btn btn-primary btn-sm">Xem</a>
                     <a href="{{ route('adminimages.editImage', $row->id) }}" class="btn btn-warning btn-sm">Sửa tên</a>
-
-
-
-
                 </td>
             </tr>
-
             @endforeach
-
             @else
             <tr>
                 <td colspan="5" class="text-center">No Image Found</td>
             </tr>
             @endif
         </table>
-
     </div>
 </div>
-
 @endsection('content')
