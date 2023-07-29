@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2023 at 09:06 AM
+-- Generation Time: Jul 29, 2023 at 04:01 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -31,7 +31,6 @@ CREATE TABLE `authors` (
   `author_id` bigint(20) UNSIGNED NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -40,9 +39,14 @@ CREATE TABLE `authors` (
 -- Dumping data for table `authors`
 --
 
-INSERT INTO `authors` (`author_id`, `username`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Duy Anh', 'nguyenduyanh.tit@gmail.com', 'nguyenduyanh', NULL, NULL),
-(2, 'Hương Giang', 'phmhnggng@gmail.com', 'phmhnggng', NULL, NULL);
+INSERT INTO `authors` (`author_id`, `username`, `email`, `created_at`, `updated_at`) VALUES
+(0, 'Không rõ tác giả', 'unknown@unknown', '2023-07-29 06:53:10', '2023-07-29 06:53:10'),
+(1, 'Duy Anh', 'nguyenduyanh.tit@gmail.com', NULL, NULL),
+(3, 'Obama', 'obama@gmail.us', '2023-07-29 05:54:07', '2023-07-29 05:54:07'),
+(4, 'Trương Mỹ Huyền', 'myhuyentruong@gmail.com', '2023-07-29 05:56:08', '2023-07-29 05:56:08'),
+(5, 'Tường Ly', 'maituongly@gmail.com', '2023-07-29 05:57:53', '2023-07-29 05:57:53'),
+(10, 'Kiều Dũng', 'ktdzung@gmail.com', '2023-07-29 06:52:14', '2023-07-29 06:52:14'),
+(12, 'Phạm Hương Giang', 'phmgiangibdneu@gmail.com', '2023-07-29 06:54:11', '2023-07-29 06:54:11');
 
 -- --------------------------------------------------------
 
@@ -94,16 +98,17 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `image_name`, `created_at`, `updated_at`) VALUES
-(1, 'banh-tart-trung.jpg', NULL, NULL),
+(0, 'unknown.png', '2023-07-29 05:24:06', '2023-07-29 05:24:06'),
 (2, 'pho-cuon.jpg', NULL, NULL),
-(3, 'che-dau-den.jpg', NULL, NULL),
+(3, 'che-dau-den.jpg', NULL, '2023-07-29 01:06:03'),
 (4, 'com-rang.jpg', NULL, NULL),
-(5, 'mi-tom.jpg', NULL, NULL),
+(5, 'mi-tom.jpg', NULL, '2023-07-29 01:05:06'),
 (6, 'banh-deo.jpg', '2023-07-28 09:21:41', '2023-07-28 09:21:41'),
-(7, 'sua-chua.jpg', '2023-07-28 09:22:27', '2023-07-28 09:22:27'),
+(7, 'sua-chua.jpg', '2023-07-28 09:22:27', '2023-07-29 00:39:09'),
 (8, 'sinh-to-xoai.jpg', '2023-07-28 09:24:07', '2023-07-28 09:24:07'),
 (9, 'tra-tao.png', '2023-07-28 09:25:27', '2023-07-28 09:25:27'),
-(10, 'tao-pho.jpg', '2023-07-28 09:30:49', '2023-07-28 09:30:49');
+(15, 'tao-pho.jpg', '2023-07-29 05:15:25', '2023-07-29 05:15:25'),
+(18, 'banh-tart-trung.jpg', '2023-07-29 05:28:37', '2023-07-29 05:28:37');
 
 -- --------------------------------------------------------
 
@@ -134,7 +139,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2023_07_23_195917_create_sessions_table', 5),
 (17, '2023_07_28_160117_create_images_table', 6),
 (18, '2023_07_28_163435_remove_column_from_table', 7),
-(19, '2023_07_28_163557_add_image_id_to_posts', 8);
+(19, '2023_07_28_163557_add_image_id_to_posts', 8),
+(20, '2023_07_29_105210_remove_column_from_table', 9),
+(21, '2023_07_29_114817_add_on_delete_set_null_to_author_id_in_posts', 10),
+(22, '2023_07_29_115910_add_on_delete_set_defaults', 11),
+(23, '2023_07_29_123034_add_on_delete_set_default', 12);
 
 -- --------------------------------------------------------
 
@@ -186,7 +195,7 @@ CREATE TABLE `posts` (
   `meta` text NOT NULL,
   `content` text NOT NULL,
   `date_posted` datetime NOT NULL,
-  `author_id` bigint(20) UNSIGNED NOT NULL,
+  `author_id` bigint(20) UNSIGNED NOT NULL DEFAULT 9999,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `image_id` bigint(20) UNSIGNED DEFAULT NULL
@@ -197,11 +206,10 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `title`, `meta`, `content`, `date_posted`, `author_id`, `created_at`, `updated_at`, `image_id`) VALUES
-(1, 'Cách làm bánh Tart Trứng', 'Hướng dẫn chi tiết cách làm món bánh tart trứng siêu đơn giản tại nhà. Cùng đọc và tìm hiểu ngay!', 'Làm bánh tart trứng là một quá trình đơn giản và thú vị. Dưới đây là hướng dẫn cơ bản để bạn có thể thực hiện tại nhà:  Nguyên liệu cần chuẩn bị:  Bột tarts (hoặc bạn có thể làm từ bột mỳ, bơ và đường) Trứng (khoảng 3-4 quả) Đường (khoảng 150g) Sữa tươi (khoảng 200ml) Một chút vani hoặc mùi hương tự nhiên (tuỳ chọn) Các bước thực hiện:  Chuẩn bị bột tart: Nếu bạn mua bột tart sẵn có, làm theo hướng dẫn trên bao bì để nướng vỏ tart. Nếu bạn muốn tự làm bột tart, kết hợp 150g bột mỳ, 75g bơ lạnh (cắt thành từng miếng nhỏ), 50g đường và một chút muối. Trộn chúng lại với nhau cho đến khi hỗn hợp trở nên bột mịn và bắt đầu tụt lại với nhau. Lưu ý không nhồi quá nhiều để tránh làm bột cứng. Gói bột lại bằng giấy thủy tinh hoặc nhựa dán và để trong tủ lạnh trong khoảng 30 phút. Làm nhân trứng: Đánh trứng trong một tô lớn, sau đó thêm đường và khuấy đều. Tiếp theo, thêm sữa tươi và vani hoặc mùi hương (nếu có) vào hỗn hợp trứng và đường. Khuấy đều cho đến khi tạo thành một hỗn hợp mịn. Làm vỏ bánh tart: Lấy bột tart từ tủ lạnh và để ở nhiệt độ phòng trong vài phút trước khi dùng. Lấy từng phần nhỏ bột và dùng tay nặn nhẹ để lót lên các khuôn bánh tart (khuôn có thể làm từ nhựa hoặc kim loại). Dùng ngón tay đều nhấn từng miếng bột vào khuôn, đảm bảo đều và mỏng. Sau đó dùng dao cắt những phần bột thừa ở viền khuôn. Lắp ráp và nướng bánh tart: Đổ nhân trứng đã chuẩn bị vào từng vỏ bánh tart đã làm sẵn, điền khoảng 2/3 chiều cao của bánh tart. Đặt các bánh tart đã lắp nhân lên khay nướng hoặc khay bánh và đặt vào lò nướng đã được trước đó ở nhiệt độ 180°C. Nướng bánh trong khoảng 15-20 phút hoặc cho đến khi bánh có màu vàng đẹp và nhân đã đông. Hoàn thiện: Sau khi nướng xong, để bánh tart trứng nguội tự nhiên. Bạn có thể thưởng thức bánh tart trứng nguội hoặc để nguội hoàn toàn trước khi thưởng thức. Chúc bạn thành công và thưởng thức bánh tart trứng thơm ngon!', '2023-07-28 15:04:22', 2, NULL, NULL, 1),
+(1, 'Cách làm bánh Tart Trứng', 'Hướng dẫn chi tiết cách làm món bánh tart trứng siêu đơn giản tại nhà', 'Làm bánh tart trứng là một quá trình đơn giản và thú vị. Dưới đây là hướng dẫn cơ bản để bạn có thể thực hiện tại nhà:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\nBột tarts (hoặc bạn có thể làm từ bột mỳ, bơ và đường)\r\nTrứng (khoảng 3-4 quả)\r\nĐường (khoảng 150g)\r\nSữa tươi (khoảng 200ml)\r\nMột chút vani hoặc mùi hương tự nhiên (tuỳ chọn)\r\nCác bước thực hiện:\r\n\r\nChuẩn bị bột tart:\r\nNếu bạn mua bột tart sẵn có, làm theo hướng dẫn trên bao bì để nướng vỏ tart.\r\nNếu bạn muốn tự làm bột tart, kết hợp 150g bột mỳ, 75g bơ lạnh (cắt thành từng miếng nhỏ), 50g đường và một chút muối. Trộn chúng lại với nhau cho đến khi hỗn hợp trở nên bột mịn và bắt đầu tụt lại với nhau. Lưu ý không nhồi quá nhiều để tránh làm bột cứng.\r\nGói bột lại bằng giấy thủy tinh hoặc nhựa dán và để trong tủ lạnh trong khoảng 30 phút.\r\nLàm nhân trứng:\r\nĐánh trứng trong một tô lớn, sau đó thêm đường và khuấy đều.\r\nTiếp theo, thêm sữa tươi và vani hoặc mùi hương (nếu có) vào hỗn hợp trứng và đường. Khuấy đều cho đến khi tạo thành một hỗn hợp mịn.\r\nLàm vỏ bánh tart:\r\nLấy bột tart từ tủ lạnh và để ở nhiệt độ phòng trong vài phút trước khi dùng.\r\nLấy từng phần nhỏ bột và dùng tay nặn nhẹ để lót lên các khuôn bánh tart (khuôn có thể làm từ nhựa hoặc kim loại).\r\nDùng ngón tay đều nhấn từng miếng bột vào khuôn, đảm bảo đều và mỏng. Sau đó dùng dao cắt những phần bột thừa ở viền khuôn.\r\nLắp ráp và nướng bánh tart:\r\nĐổ nhân trứng đã chuẩn bị vào từng vỏ bánh tart đã làm sẵn, điền khoảng 2/3 chiều cao của bánh tart.\r\nĐặt các bánh tart đã lắp nhân lên khay nướng hoặc khay bánh và đặt vào lò nướng đã được trước đó ở nhiệt độ 180°C.\r\nNướng bánh trong khoảng 15-20 phút hoặc cho đến khi bánh có màu vàng đẹp và nhân đã đông.\r\nHoàn thiện:\r\nSau khi nướng xong, để bánh tart trứng nguội tự nhiên.\r\nBạn có thể thưởng thức bánh tart trứng nguội hoặc để nguội hoàn toàn trước khi thưởng thức.\r\nChúc bạn thành công và thưởng thức bánh tart trứng thơm ngon!', '2023-07-29 14:09:18', 1, NULL, '2023-07-29 05:28:16', 0),
 (2, 'Cách làm món Phở Cuốn siêu ngon', 'Cùng học cách làm món phở cuốn siêu ngon. Phở cuốn là món ăn truyền thống của Việt Nam.', 'Phở cuốn, còn được gọi là cuốn phở, là một món ăn ngon miệng và độc đáo trong ẩm thực Việt Nam. Dưới đây là cách làm phở cuốn đơn giản:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\nBánh phở (bánh tráng mỏng)\r\nThịt bò luộc mỏng (hoặc thịt gà, tôm, heo tùy sở thích)\r\nRau sống (rau húng, rau diếp cá, rau mùi, giá đỗ, lá lốt, ... theo sở thích)\r\nHành tây mỏng cắt sợi\r\nBún tươi\r\nTương phở hoặc tương xào (được làm từ nước dùng phở)\r\nHướng dẫn làm phở cuốn:\r\n\r\nBước 1: Chuẩn bị một tô nước ấm, đặt từng tấm bánh phở vào nước để làm mềm.\r\n\r\nBước 2: Khi bánh phở mềm, lấy ra và đặt lên bề mặt phẳng, bố trí các nguyên liệu như thịt bò, rau sống, hành tây, bún tươi, và một ít tương phở ở phía trên bánh.\r\n\r\nBước 3: Gói chặt các nguyên liệu trong bánh phở bằng cách gập hai bên thành cuốn và sau đó cuốn chặt từ dưới lên trên.\r\n\r\nBước 4: Lặp lại quá trình cho đến khi sử dụng hết nguyên liệu.\r\n\r\nBước 5: Chuẩn bị một chén nước mắm pha với một ít đường, tỏi băm nhỏ, và ớt thái mỏng làm nước chấm ăn kèm.\r\n\r\nPhở cuốn đã sẵn sàng để thưởng thức. Hãy thưởng thức món ăn ngon miệng này bằng cách nhúng phở cuốn vào chén nước mắm chấm thơm ngon. Nếu muốn, bạn có thể thêm các loại gia vị khác như hành phi, đậu phộng rang, và bột tỏi ớt để làm cho món ăn thêm đa dạng và hấp dẫn. Chúc bạn ngon miệng!', '2023-07-21 15:52:42', 1, NULL, NULL, 2),
-(3, 'Hướng Dẫn làm chè đậu đen mát lạnh mùa hè.', 'Hướng dẫn nấu món chè đậu đen. Cách làm chè đậu đen đơn giản tại nhà.', 'Làm món chè đậu đen là một cách thưởng thức tráng miệng ngon lành và bổ dưỡng. Dưới đây là cách làm chè đậu đen đơn giản:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\n1 chén đậu đen đã ngâm qua đêm hoặc trên 6 giờ\r\n6 chén nước\r\n1 ống vani (hoặc 1 thìa cà phê tinh dầu vani)\r\n1 chén đường (có thể điều chỉnh theo khẩu vị)\r\n1/4 thìa cà phê muối\r\nNước cốt dừa (tuỳ chọn)\r\nThạch đường, nước cốt dừa, hoặc hạt chia để trang trí (tuỳ chọn)\r\nHướng dẫn làm chè đậu đen:\r\n\r\nBước 1: Rửa sạch đậu đen sau khi đã ngâm. Cho đậu vào nồi và đổ 6 chén nước vào. Đun đậu đen ở lửa cao cho đến khi nước sôi, sau đó giảm lửa xuống.\r\n\r\nBước 2: Khi đậu đen đã mềm, thêm vani và muối vào nồi. Khuấy đều và nấu tiếp khoảng 5 phút nữa để các hương vị kết hợp.\r\n\r\nBước 3: Tiếp theo, thêm đường vào nồi và khuấy đều cho đến khi đường tan hoàn toàn.\r\n\r\nBước 4: Nếu muốn chè đậu đen mềm mịn hơn, bạn có thể sử dụng máy xay sinh tố để xay nhuyễn. Nếu muốn chè có độ sệt hơn, bạn có thể thêm một ít nước cốt dừa vào chè.\r\n\r\nBước 5: Cho chè vào tô và trang trí bằng thạch đường, nước cốt dừa hoặc hạt chia để tăng thêm vị trí đẹp mắt và hấp dẫn.\r\n\r\nChè đậu đen đã hoàn thành! Bạn có thể thưởng thức chè ấm hoặc để nguội, tùy theo sở thích cá nhân. Món chè này thích hợp để thưởng thức vào bất kỳ thời điểm nào trong ngày, đặc biệt là vào những ngày hè nóng bức. Chúc bạn thực hiện thành công và thưởng thức ngon miệng!', '2023-07-21 15:54:34', 2, NULL, NULL, 3),
-(4, 'Cách làm cơm rang siêu đơn giản tại nhà.', 'Hướng dẫn làm món cơm rang thập cơm. Công thức siêu dễ cho mọi người cùng làm.', 'Món cơm rang (hay còn gọi là cơm chiên) là một món ăn ngon và phổ biến trong ẩm thực nhiều quốc gia. Dưới đây là cách làm cơm rang trứng và thịt heo đơn giản:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\n2 chén cơm trắng đã nấu chín và để nguội\r\n100g thịt heo (hoặc thịt gà, tôm, hoặc cá, tùy sở thích) - thái nhỏ\r\n2 quả trứng gà\r\n1 củ hành tây - thái nhỏ\r\n2 củ tỏi - băm nhỏ\r\n1/2 củ hành tím - thái nhỏ\r\n1/2 củ cà rốt - thái nhỏ\r\n1/2 củ cải bắp - thái nhỏ\r\n2 thìa canh dầu ăn\r\n3 thìa canh nước mắm\r\n1 thìa canh nước tương\r\n1 thìa canh xì dầu\r\nTiêu, hạt nêm và muối theo khẩu vị\r\nHành lá và ớt tươi thái nhỏ để trang trí (tuỳ chọn)\r\nHướng dẫn làm cơm rang:\r\n\r\nBước 1: Đánh trứng trong một tô lớn. Đổ cơm đã nguội vào tô và trộn đều cho đến khi cơm được phủ một lớp mỏng trứng đều khắp.\r\n\r\nBước 2: Trong một chảo hay nồi lớn, đổ dầu ăn vào và đun nóng. Khi dầu nóng, thêm tỏi và hành tím vào, phi thơm.\r\n\r\nBước 3: Tiếp theo, thêm thịt heo vào và xào cho đến khi thịt chín và có màu vàng caramelize.\r\n\r\nBước 4: Tiếp tục thêm cà rốt và cải bắp vào chảo, xào chung với thịt heo cho đến khi các loại rau củ chín mềm.\r\n\r\nBước 5: Đổ cơm đã trộn trứng vào chảo, khuấy đều với các loại rau củ và thịt heo. Nêm nếm gia vị với nước mắm, nước tương, xì dầu, tiêu, hạt nêm và muối theo khẩu vị.\r\n\r\nBước 6: Xào cơm trong một vài phút cho đến khi cơm được chín và có màu vàng hấp dẫn.\r\n\r\nBước 7: Trang trí cơm rang với hành lá và ớt tươi thái nhỏ trước khi thưởng thức.\r\n\r\nCơm rang đã hoàn thành! Bạn có thể thưởng thức cơm rang một mình hoặc kèm theo một số món ăn nhỏ, rau sống, nước mắm chua ngọt hoặc tương ớt tùy theo sở thích cá nhân. Chúc bạn thành công và thưởng thức bữa ăn ngon miệng!', '2023-07-21 15:57:41', 1, NULL, NULL, 4),
-(5, 'Hướng dẫn làm mì tôm cực kì đơn giản', 'Làm món mì tôm cực kì đơn giản với một vài bước. Xem ngay để học cách làm mì tôm!', 'Món mì tôm (hay còn gọi là mì gói) là món ăn nhanh, tiện lợi và phổ biến trên toàn thế giới. Dưới đây là cách làm món mì tôm đơn giản:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\n1 gói mì tôm (loại mà bạn thích)\r\n2 1/2 chén nước\r\n1 quả trứng gà\r\nRau sống (rau mùi, hành lá, hành phi, ớt tươi, ngò gai,...)\r\nHành hoa, tỏi băm và ớt bột để trang trí (tuỳ chọn)\r\nHướng dẫn làm mì tôm:\r\n\r\nBước 1: Đun sôi nước trong một nồi lớn. Khi nước sôi, cho gói mì tôm vào nồi và đun khoảng 2-3 phút cho đến khi mì chín mềm.\r\n\r\nBước 2: Trong khi mì đang nấu, hòa 1 gói gia vị (nước xốt mì tôm) với 2 1/2 chén nước trong một tô riêng.\r\n\r\nBước 3: Khi mì đã chín, gắp mì ra khỏi nồi và đổ nước xốt mì tôm vào nồi. Đun sôi nước xốt trong khoảng 1 phút.\r\n\r\nBước 4: Đánh trứng trong một tô riêng và đổ trứng vào nồi với nước xốt mì tôm. Khuấy đều để trứng đông thành sợi nhỏ.\r\n\r\nBước 5: Thêm gia vị từ gói mì tôm vào nồi và khuấy đều.\r\n\r\nBước 6: Đổ mì vào nồi và khuấy đều với nước xốt và trứng cho đến khi mì được ướp đều gia vị.\r\n\r\nBước 7: Cho mì tôm vào đĩa, trang trí bằng rau sống và hành hoa, tỏi băm và ớt bột (tuỳ chọn).\r\n\r\nMì tôm đã hoàn thành! Bạn có thể thưởng thức món ăn ngay khi nó còn nóng. Nếu muốn, bạn cũng có thể thêm thêm gia vị như tương ớt, hành phi, hay chanh để làm cho món mì tôm thêm hấp dẫn và đa dạng hương vị. Chúc bạn ngon miệng!', '2023-07-21 18:00:22', 2, NULL, NULL, 5);
+(3, 'Hướng Dẫn làm tào phớ mát lạnh mùa hè.', 'Hướng dẫn nấu món tào phớ. Cách làm tào phớ đơn giản tại nhà.', 'Tào phớ là một món tráng miệng ngon miệng và phổ biến trong ẩm thực Á Đông. Dưới đây là cách làm tào phớ truyền thống:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\nPhần tào:\r\n\r\n1 lít nước đậu nành tươi (hoặc bạn có thể dùng sữa đậu nành tươi)\r\n2 muỗng canh gắp (hoặc 15g) muối magnesi clorid (E511) hoặc muối khoáng rửa đậu nành\r\n2-3 muỗng canh đường (tuỳ khẩu vị)\r\n1/2 muỗng cà phê vani (tuỳ chọn)\r\nPhần nước đường:\r\n\r\n500ml nước\r\n100g đường\r\nPhần đá:\r\n\r\nĐá viên hoặc đá nhỏ (tuỳ thích)\r\nPhần trân châu (tuỳ chọn):\r\n\r\nHạt trân châu (sẵn bán tại các cửa hàng thực phẩm châu Á) hoặc tự làm từ bột tapioca và màu thực phẩm.\r\nCác bước thực hiện:\r\n\r\nLàm tào:\r\nTrong một nồi lớn, đun nước đậu nành tươi. Khi nước nấu sôi, giảm lửa xuống nhỏ.\r\nTrong một tô nhỏ, pha muối magnesi clorid (hoặc muối khoáng rửa đậu nành) với một ít nước ấm, khuấy đều cho đến khi muối hoàn toàn tan.\r\nKhi nước đậu nành sôi nhẹ, thêm muối đã pha vào nồi và khuấy đều.\r\nTiếp theo, thêm đường và vani (nếu dùng) vào nồi, khuấy đều cho đến khi đường hoàn toàn tan và hỗn hợp đồng nhất.\r\nTiếp tục đun nấu nước đậu nành trong khoảng 5 phút, tiếp tục khuấy đều để ngăn tào bị cháy đáy.\r\nTắt bếp và để hỗn hợp nguội tự nhiên trong nồi khoảng 15 phút.\r\nLàm nước đường:\r\nTrong một nồi nhỏ, hòa đường vào nước và đun nấu đến khi đường hoàn toàn tan. Để nguội.\r\nLàm trân châu (tuỳ chọn):\r\nNếu bạn muốn thêm trân châu vào tào phớ, theo hướng dẫn trên bao bì hạt trân châu hoặc tự làm từ bột tapioca và màu thực phẩm theo hướng dẫn cụ thể.\r\nThưởng thức tào phớ:\r\nĐổ tào phớ vào các chén hay ly nhỏ, thêm nước đường và đá viên (hoặc đá nhỏ) vào trên tào.\r\nNếu bạn dùng trân châu, thêm một số hạt trân châu vào trên tào phớ.\r\nThưởng thức ngay khi tào phớ còn mát.\r\nLưu ý: Tùy theo khẩu vị, bạn có thể thêm đậu phụng rang thơm và bột thạch rau câu vào tào phớ để tăng thêm hương vị và độ ngon của món tráng miệng này.', '2023-07-29 14:11:40', 0, NULL, '2023-07-29 06:53:42', 3),
+(4, 'Cách làm cơm rang siêu đơn giản tại nhà.', 'Hướng dẫn làm món cơm rang thập cơm. Công thức siêu dễ cho mọi người cùng làm.', 'Món cơm rang (hay còn gọi là cơm chiên) là một món ăn ngon và phổ biến trong ẩm thực nhiều quốc gia. Dưới đây là cách làm cơm rang trứng và thịt heo đơn giản:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\n2 chén cơm trắng đã nấu chín và để nguội\r\n100g thịt heo (hoặc thịt gà, tôm, hoặc cá, tùy sở thích) - thái nhỏ\r\n2 quả trứng gà\r\n1 củ hành tây - thái nhỏ\r\n2 củ tỏi - băm nhỏ\r\n1/2 củ hành tím - thái nhỏ\r\n1/2 củ cà rốt - thái nhỏ\r\n1/2 củ cải bắp - thái nhỏ\r\n2 thìa canh dầu ăn\r\n3 thìa canh nước mắm\r\n1 thìa canh nước tương\r\n1 thìa canh xì dầu\r\nTiêu, hạt nêm và muối theo khẩu vị\r\nHành lá và ớt tươi thái nhỏ để trang trí (tuỳ chọn)\r\nHướng dẫn làm cơm rang:\r\n\r\nBước 1: Đánh trứng trong một tô lớn. Đổ cơm đã nguội vào tô và trộn đều cho đến khi cơm được phủ một lớp mỏng trứng đều khắp.\r\n\r\nBước 2: Trong một chảo hay nồi lớn, đổ dầu ăn vào và đun nóng. Khi dầu nóng, thêm tỏi và hành tím vào, phi thơm.\r\n\r\nBước 3: Tiếp theo, thêm thịt heo vào và xào cho đến khi thịt chín và có màu vàng caramelize.\r\n\r\nBước 4: Tiếp tục thêm cà rốt và cải bắp vào chảo, xào chung với thịt heo cho đến khi các loại rau củ chín mềm.\r\n\r\nBước 5: Đổ cơm đã trộn trứng vào chảo, khuấy đều với các loại rau củ và thịt heo. Nêm nếm gia vị với nước mắm, nước tương, xì dầu, tiêu, hạt nêm và muối theo khẩu vị.\r\n\r\nBước 6: Xào cơm trong một vài phút cho đến khi cơm được chín và có màu vàng hấp dẫn.\r\n\r\nBước 7: Trang trí cơm rang với hành lá và ớt tươi thái nhỏ trước khi thưởng thức.\r\n\r\nCơm rang đã hoàn thành! Bạn có thể thưởng thức cơm rang một mình hoặc kèm theo một số món ăn nhỏ, rau sống, nước mắm chua ngọt hoặc tương ớt tùy theo sở thích cá nhân. Chúc bạn thành công và thưởng thức bữa ăn ngon miệng!', '2023-07-21 15:57:41', 1, NULL, NULL, 15);
 
 -- --------------------------------------------------------
 
@@ -223,7 +231,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('uakOpWJy1sXmiKD1BZd1fYrXsTmokqv6VzZWS6dg', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoickFlYXBaa0R4ZjNLem1JZUVuZ3h2cDd0N09sbXVneGlNQmtiYTBwWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQvYWRtaW5pbWFnZXMvc2hvd0FsbCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkZmVSRjZqSnRTcWF2d1dYT0xYUGV3TzRrd28ycUFDUlVrMkxpdEJNUkNDMnR5NGtaNGpwcmEiO30=', 1690613826);
+('IeYaqQSANiBLsvGgCkpji5HBp1M0bTKaSEKXSuM9', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiS3AyOGUzV1l4TENOWFc4OG5WeGJINXkxeVRkamNpakZ4Z1hxblhZdSI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRmZVJGNmpKdFNxYXZ3V1hPTFhQZXdPNGt3bzJxQUNSVWsyTGl0Qk1SQ0MydHk0a1o0anByYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQvYWRtaW5hdXRob3JzL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1690639170);
 
 -- --------------------------------------------------------
 
@@ -311,8 +319,8 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`),
-  ADD KEY `posts_author_id_foreign` (`author_id`),
-  ADD KEY `posts_image_id_foreign` (`image_id`);
+  ADD KEY `posts_image_id_foreign` (`image_id`),
+  ADD KEY `posts_author_id_foreign` (`author_id`);
 
 --
 -- Indexes for table `sessions`
@@ -337,7 +345,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -355,13 +363,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -373,13 +381,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
