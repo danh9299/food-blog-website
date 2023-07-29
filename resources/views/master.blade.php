@@ -10,6 +10,7 @@
     - primary meta tags
   -->
     <title>Home</title>
+    
     <meta name="title" content="Home.">
     <meta name="description" content="This is a blog for sharing food">
 
@@ -29,7 +30,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-   </head>
+  <!--Logo website-->
+    <link rel="icon" type="image" href="{{asset('assets/images/logo.jpg')}}"/> 
+  
+  
+  </head>
 
 <body>
 
