@@ -2,14 +2,14 @@
 
 @section('content')
 
-<!--All Posts
+
 @if($message = Session::get('success'))
 
 <div class="alert alert-success">
     {{ $message }}
 </div>
 
-@endif-->
+@endif
 
 <div class="card mt-5">
     <div class="card-header">
@@ -41,7 +41,7 @@
                 <td>
                     <a href="{{ route('adminimages.confirmDeleteImage', $row->id) }}" class="btn btn-danger btn-sm">Xóa</a>
                     <a href="{{ route('adminimages.showImage', $row->id) }}" class="btn btn-primary btn-sm">Xem</a>
-                    <a href="#" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="{{ route('adminimages.editImage', $row->id) }}" class="btn btn-warning btn-sm">Sửa tên</a>
 
 
 

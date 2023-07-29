@@ -59,9 +59,36 @@ class ImageController extends Controller
          // Nếu không có file ảnh được upload, thông báo lỗi
          return redirect()->back()->with('error', 'Bạn chưa chọn ảnh để tải lên.');
      }
+     // show form for Edit the image
+     public function editImage(Image $image){
+        return view('adminimages.editImage',compact('image'));
+     }
+    // Update new image name in the db
+    public function updateImage(Request $request, Image $image){
+        
+        $request->validate([
+        
+            'id' => 'required',
+            'image_name' => 'required',
+        ]);
+        $image = Image::find($request->id);
+
+
+        $oldName = $image->image_name;
+        $newName = $request->image_name;
+
+        rename(public_path('assets/images/'.$oldName), public_path('assets/images/'.$newName));
+        $image->image_name = $request->image_name;
+        $image->save();
+        return redirect()->route('adminimages.showAll')->with('done', 'Cập nhật tên ảnh thành công');
+    }
+
+
+     // Confirm delete image form
     public function confirmDeleteImage(Image $image){
         return view('adminimages.confirmDeleteImage',compact('image'));
     }
+    // Delete image
     public function deleteImage(Image $image){
         
         $image->delete();

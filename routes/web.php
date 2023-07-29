@@ -46,5 +46,7 @@ Route::middleware([
     Route::get('admin/dashboard/adminimages/showImage/{image}',[ImageController::class,'showImage'])->name('adminimages.showImage');
     Route::get('admin/dashboard/adminimages/deleteImage/{image}',[ImageController::class,'confirmDeleteImage'])->name('adminimages.confirmDeleteImage');
     Route::post('admin/dashboard/adminimages/deleteImage/{image}/confirm',[ImageController::class,'deleteImage'])->name('adminimages.deleteImage');
+    Route::get('admin/dashboard/adminimages/editImage/{image}',[ImageController::class,'editImage'])->name('adminimages.editImage');
+    Route::post('admin/dashboard/adminimages/editImage/{image}/confirm',[ImageController::class,'updateImage'])->name('adminimages.updateImage');
 });
 
