@@ -42,8 +42,8 @@ Route::middleware([
 
     // Route for Posts in admin
     Route::resource('admin/dashboard/adminposts', AdminPost::class);
-    Route::get('admin/dashboard/adminposts/{post}/show', [PostController::class, 'showData'])->name('posts.showData');
-    Route::get('admin/dashboard/adminposts/{post}/confirm', [PostController::class, 'confirmDelete'])->name('posts.confirm');
+    Route::get('admin/dashboard/adminposts/{post}/show', [PostController::class, 'showData'])->name('adminposts.showData');
+    Route::get('admin/dashboard/adminposts/{post}/confirm', [PostController::class, 'confirmDelete'])->name('adminposts.confirm');
    
     // Route for images
     Route::get('admin/dashboard/adminimages/showAll', [ImageController::class,'showAll'])->name('adminimages.showAll');

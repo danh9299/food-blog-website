@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Author;
 use App\Models\Post;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Carbon;
 class PostController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class PostController extends Controller
     {
         //
         $posts = Post::all();
-        
+       
         // Truy xuất thông tin tác giả của bài viết
        
        return view('posts.index', ['posts' => $posts]);
@@ -27,6 +28,11 @@ class PostController extends Controller
     public function create()
     {
         //
+        $authors = Author::all();
+        $images = Image::all();
+        // Truy xuất thông tin tác giả của bài viết
+       
+       return view('adminposts.create', ['authors' => $authors, 'images' => $images]);
     }
 
     /**
@@ -35,6 +41,24 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+        
+         
+            'title' => 'required',
+            'date_posted' => 'required',
+            'author_id' => 'required',
+            'image_id' => 'required',
+            
+        ]);
+        $post = new Post;
+        $post->title = $request->title;
+        $post->meta = $request->meta;
+        $post->content = $request->content;
+        $post->date_posted = $request->date_posted;
+        $post->author_id = $request->author_id;
+        $post->image_id = $request->image_id;
+        $post->save();
+        return redirect()->route('adminposts.index')->with('success','Thêm mới tác giả thành công');
     }
 
     /**
@@ -60,6 +84,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
+        $post->date_posted = Carbon::parse($post->date_posted)->toDateString();
+        $authors = Author::all();
+        $images = Image::all();
+        // Truy xuất thông tin tác giả của bài viết
+       
+       return view('adminposts.edit',  compact('post', 'authors', 'images'));
     }
 
     /**
@@ -68,6 +98,31 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        $request->validate([
+        
+            'post_id' => 'required',
+            'title' => 'required',
+            'date_posted' => 'required',
+            'author_id' => 'required',
+            'image_id' => 'required',
+            
+        ]);
+
+        $post = Post::find($request->hidden_id);
+        $post->post_id = $request->post_id;
+        $post->title = $request->title;
+        $post->meta = $request->input('meta');
+        $post->content = $request->input('content');
+        $post->date_posted = $request->input('date_posted');
+        $post->author_id = $request->author_id;
+        $post->image_id = $request->image_id;
+        $post->save();
+      
+     
+
+        // Chuyển hướng về trang danh sách tạp chí
+        return redirect()->route('adminposts.index')->with('success', 'Cập nhật tác giả thành công');
+
     }
 
     /**

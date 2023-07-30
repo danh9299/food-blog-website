@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col col-md-11"><b>Danh sách bài viết</b></div>
             <div class="col col-md-1">
-                <a href="#" class="btn btn-success btn-sm float-end">Thêm</a>
+                <a href="{{ route('posts.create') }}" class="btn btn-success btn-sm float-end">Thêm</a>
             </div>
         </div>
     </div>
@@ -40,9 +40,9 @@
                 <td>{{ $row->author->username }}</td>
 
                 <td>
-                    <a href="{{ route('posts.confirm', $row->post_id) }}" class="btn btn-danger btn-sm">Xóa</a>
-                    <a href="{{ route('posts.showData', $row->post_id) }}" class="btn btn-primary btn-sm">Xem</a>
-                    <a href="#" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="{{ route('adminposts.confirm', $row->post_id) }}" class="btn btn-danger btn-sm">Xóa</a>
+                    <a href="{{ route('adminposts.showData', $row->post_id) }}" class="btn btn-primary btn-sm">Xem</a>
+                    <a href="{{ route('posts.edit', $row->post_id) }}" class="btn btn-warning btn-sm">Sửa</a>
 
 
 

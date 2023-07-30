@@ -11,7 +11,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-label-form">Mã tác giả</label>
                 <div class="col-sm-10">
-                    <input type="text" name="author_id" class="form-control" value="{{ $author->author_id }}" />
+                    <input type="text" name="author_id" class="form-control" value="{{ $author->author_id }}" readonly/>
                 </div>
             </div>
             <div class="row mb-3">
