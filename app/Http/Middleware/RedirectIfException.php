@@ -13,25 +13,14 @@ class RedirectIfException
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
-        if (!$this->routeExists($request->getRequestUri())) {
+        try {
+            // Thực hiện yêu cầu và chuyển tiếp nếu không có exception
+            return $next($request);
+        } catch (\Exception $e) {
+            // Xử lý exception ở đây, trong trường hợp này chuyển hướng đến trang 404
             return response()->view('/404', [], 404);
         }
-
-        return $next($request);
-    }
-
-    private function routeExists($uri)
-    {
-        $routes = app()->router->getRoutes()->getRoutes();
-
-        foreach ($routes as $route) {
-            if ($uri === $route->uri()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
