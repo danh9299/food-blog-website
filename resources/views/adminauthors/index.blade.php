@@ -4,7 +4,7 @@
 <!--All Posts-->
 @if($message = Session::get('success'))
 
-<div class="alert alert-success">
+<div class="mt-5 alert alert-success">
     {{ $message }}
 </div>
 

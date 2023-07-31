@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2023 at 12:47 PM
+-- Generation Time: Jul 31, 2023 at 12:55 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -148,7 +148,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2023_07_29_123034_add_on_delete_set_default', 12),
 (24, '2023_07_30_073454_change_auto_increment_for_posts_table', 13),
 (25, '2023_07_30_082622_change_date_posted_column_type_in_posts_table', 14),
-(26, '2023_07_31_093334_create_emails', 15);
+(26, '2023_07_31_093334_create_emails', 15),
+(27, '2023_07_31_105439_update_table_nullable_columns', 16);
 
 -- --------------------------------------------------------
 
@@ -197,8 +198,8 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `posts` (
   `post_id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
-  `meta` text NOT NULL,
-  `content` text NOT NULL,
+  `meta` text DEFAULT NULL,
+  `content` text DEFAULT NULL,
   `date_posted` date NOT NULL,
   `author_id` bigint(20) UNSIGNED NOT NULL DEFAULT 9999,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -215,7 +216,8 @@ INSERT INTO `posts` (`post_id`, `title`, `meta`, `content`, `date_posted`, `auth
 (2, 'Cách làm món Phở Cuốn siêu ngon', 'Cùng học cách làm món phở cuốn siêu ngon. Phở cuốn là món ăn truyền thống của Việt Nam.', 'Phở cuốn, còn được gọi là cuốn phở, là một món ăn ngon miệng và độc đáo trong ẩm thực Việt Nam. Dưới đây là cách làm phở cuốn đơn giản:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\nBánh phở (bánh tráng mỏng)\r\nThịt bò luộc mỏng (hoặc thịt gà, tôm, heo tùy sở thích)\r\nRau sống (rau húng, rau diếp cá, rau mùi, giá đỗ, lá lốt, ... theo sở thích)\r\nHành tây mỏng cắt sợi\r\nBún tươi\r\nTương phở hoặc tương xào (được làm từ nước dùng phở)\r\nHướng dẫn làm phở cuốn:\r\n\r\nBước 1: Chuẩn bị một tô nước ấm, đặt từng tấm bánh phở vào nước để làm mềm.\r\n\r\nBước 2: Khi bánh phở mềm, lấy ra và đặt lên bề mặt phẳng, bố trí các nguyên liệu như thịt bò, rau sống, hành tây, bún tươi, và một ít tương phở ở phía trên bánh.\r\n\r\nBước 3: Gói chặt các nguyên liệu trong bánh phở bằng cách gập hai bên thành cuốn và sau đó cuốn chặt từ dưới lên trên.\r\n\r\nBước 4: Lặp lại quá trình cho đến khi sử dụng hết nguyên liệu.\r\n\r\nBước 5: Chuẩn bị một chén nước mắm pha với một ít đường, tỏi băm nhỏ, và ớt thái mỏng làm nước chấm ăn kèm.\r\n\r\nPhở cuốn đã sẵn sàng để thưởng thức. Hãy thưởng thức món ăn ngon miệng này bằng cách nhúng phở cuốn vào chén nước mắm chấm thơm ngon. Nếu muốn, bạn có thể thêm các loại gia vị khác như hành phi, đậu phộng rang, và bột tỏi ớt để làm cho món ăn thêm đa dạng và hấp dẫn. Chúc bạn ngon miệng!', '2023-07-28', 5, NULL, '2023-07-31 03:10:50', 2),
 (3, 'Hướng Dẫn làm tào phớ mát lạnh mùa hè.', 'Hướng dẫn nấu món tào phớ. Cách làm tào phớ đơn giản tại nhà.', 'Tào phớ là một món tráng miệng ngon miệng và phổ biến trong ẩm thực Á Đông. Dưới đây là cách làm tào phớ truyền thống:\r\n\r\nNguyên liệu cần chuẩn bị cho món tào phớ này:\r\n\r\nPhần tào:\r\n\r\n1 lít nước đậu nành tươi (hoặc bạn có thể dùng sữa đậu nành tươi)\r\n2 muỗng canh gắp (hoặc 15g) muối magnesi clorid (E511) hoặc muối khoáng rửa đậu nành\r\n2-3 muỗng canh đường (tuỳ khẩu vị)\r\n1/2 muỗng cà phê vani (tuỳ chọn)\r\nPhần nước đường:\r\n\r\n500ml nước\r\n100g đường\r\nPhần đá:\r\n\r\nĐá viên hoặc đá nhỏ (tuỳ thích)\r\nPhần trân châu (tuỳ chọn):\r\n\r\nHạt trân châu (sẵn bán tại các cửa hàng thực phẩm châu Á) hoặc tự làm từ bột tapioca và màu thực phẩm.\r\nCác bước thực hiện:\r\n\r\nLàm tào:\r\nTrong một nồi lớn, đun nước đậu nành tươi. Khi nước nấu sôi, giảm lửa xuống nhỏ.\r\nTrong một tô nhỏ, pha muối magnesi clorid (hoặc muối khoáng rửa đậu nành) với một ít nước ấm, khuấy đều cho đến khi muối hoàn toàn tan.\r\nKhi nước đậu nành sôi nhẹ, thêm muối đã pha vào nồi và khuấy đều.\r\nTiếp theo, thêm đường và vani (nếu dùng) vào nồi, khuấy đều cho đến khi đường hoàn toàn tan và hỗn hợp đồng nhất.\r\nTiếp tục đun nấu nước đậu nành trong khoảng 5 phút, tiếp tục khuấy đều để ngăn tào bị cháy đáy.\r\nTắt bếp và để hỗn hợp nguội tự nhiên trong nồi khoảng 15 phút.\r\nLàm nước đường:\r\nTrong một nồi nhỏ, hòa đường vào nước và đun nấu đến khi đường hoàn toàn tan. Để nguội.\r\nLàm trân châu (tuỳ chọn):\r\nNếu bạn muốn thêm trân châu vào tào phớ, theo hướng dẫn trên bao bì hạt trân châu hoặc tự làm từ bột tapioca và màu thực phẩm theo hướng dẫn cụ thể.\r\nThưởng thức tào phớ:\r\nĐổ tào phớ vào các chén hay ly nhỏ, thêm nước đường và đá viên (hoặc đá nhỏ) vào trên tào.\r\nNếu bạn dùng trân châu, thêm một số hạt trân châu vào trên tào phớ.\r\nThưởng thức ngay khi tào phớ còn mát.\r\nLưu ý: Tùy theo khẩu vị, bạn có thể thêm đậu phụng rang thơm và bột thạch rau câu vào tào phớ để tăng thêm hương vị và độ ngon của món tráng miệng này.', '2023-07-27', 12, NULL, '2023-07-31 01:51:59', 15),
 (4, 'Cách làm cơm rang siêu đơn giản tại nhà.', 'Hướng dẫn làm món cơm rang thập cơm. Công thức siêu dễ cho mọi người cùng làm.', 'Món cơm rang (hay còn gọi là cơm chiên) là một món ăn ngon và phổ biến trong ẩm thực nhiều quốc gia. Dưới đây là cách làm cơm rang trứng và thịt heo đơn giản:\r\n\r\nNguyên liệu cần chuẩn bị:\r\n\r\n2 chén cơm trắng đã nấu chín và để nguội\r\n100g thịt heo (hoặc thịt gà, tôm, hoặc cá, tùy sở thích) - thái nhỏ\r\n2 quả trứng gà\r\n1 củ hành tây - thái nhỏ\r\n2 củ tỏi - băm nhỏ\r\n1/2 củ hành tím - thái nhỏ\r\n1/2 củ cà rốt - thái nhỏ\r\n1/2 củ cải bắp - thái nhỏ\r\n2 thìa canh dầu ăn\r\n3 thìa canh nước mắm\r\n1 thìa canh nước tương\r\n1 thìa canh xì dầu\r\nTiêu, hạt nêm và muối theo khẩu vị\r\nHành lá và ớt tươi thái nhỏ để trang trí (tuỳ chọn)\r\nHướng dẫn làm cơm rang:\r\n\r\nBước 1: Đánh trứng trong một tô lớn. Đổ cơm đã nguội vào tô và trộn đều cho đến khi cơm được phủ một lớp mỏng trứng đều khắp.\r\n\r\nBước 2: Trong một chảo hay nồi lớn, đổ dầu ăn vào và đun nóng. Khi dầu nóng, thêm tỏi và hành tím vào, phi thơm.\r\n\r\nBước 3: Tiếp theo, thêm thịt heo vào và xào cho đến khi thịt chín và có màu vàng caramelize.\r\n\r\nBước 4: Tiếp tục thêm cà rốt và cải bắp vào chảo, xào chung với thịt heo cho đến khi các loại rau củ chín mềm.\r\n\r\nBước 5: Đổ cơm đã trộn trứng vào chảo, khuấy đều với các loại rau củ và thịt heo. Nêm nếm gia vị với nước mắm, nước tương, xì dầu, tiêu, hạt nêm và muối theo khẩu vị.\r\n\r\nBước 6: Xào cơm trong một vài phút cho đến khi cơm được chín và có màu vàng hấp dẫn.\r\n\r\nBước 7: Trang trí cơm rang với hành lá và ớt tươi thái nhỏ trước khi thưởng thức.\r\n\r\nCơm rang đã hoàn thành! Bạn có thể thưởng thức cơm rang một mình hoặc kèm theo một số món ăn nhỏ, rau sống, nước mắm chua ngọt hoặc tương ớt tùy theo sở thích cá nhân. Chúc bạn thành công và thưởng thức bữa ăn ngon miệng!', '2023-07-21', 13, NULL, '2023-07-31 03:11:01', 4),
-(5, 'Cách làm nước chanh', 'Hướng dẫn làm nước chanh', 'Sau khi vắt chanh xong bạn tiến hành pha nước chanh theo công thức như sau, cho vào ly 40ml nước cốt chanh, 45ml nước đường, 150ml nước lọc và một chút xíu muối, khuấy đều cho hỗn hợp hòa quyện. Cuối cùng, thêm đá viên vào đầy ly. Trang trí bằng một lát chanh mỏng và vài lá bạc hà trên miệng ly cho đẹp mắt.', '2023-07-26', 4, '2023-07-30 00:40:06', '2023-07-30 01:28:42', 19);
+(5, 'Cách làm nước chanh', 'Hướng dẫn làm nước chanh', 'Sau khi vắt chanh xong bạn tiến hành pha nước chanh theo công thức như sau, cho vào ly 40ml nước cốt chanh, 45ml nước đường, 150ml nước lọc và một chút xíu muối, khuấy đều cho hỗn hợp hòa quyện. Cuối cùng, thêm đá viên vào đầy ly. Trang trí bằng một lát chanh mỏng và vài lá bạc hà trên miệng ly cho đẹp mắt.', '2023-07-26', 4, '2023-07-30 00:40:06', '2023-07-30 01:28:42', 19),
+(9, 'a', NULL, NULL, '2023-07-01', 0, '2023-07-31 03:53:59', '2023-07-31 03:53:59', 0);
 
 -- --------------------------------------------------------
 
@@ -265,7 +267,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('Y0xLXODNTTAulYsuDQmadSDFXpBANamRo2LyxE04', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiYzRrS2VwT2RQR2ZnUjVlYlJRWFVrOURnMEZ2MnhDWFRIOGZ2RmRqRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQvYWRtaW5hdXRob3JzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRmZVJGNmpKdFNxYXZ3V1hPTFhQZXdPNGt3bzJxQUNSVWsyTGl0Qk1SQ0MydHk0a1o0anByYSI7fQ==', 1690800401);
+('Y0xLXODNTTAulYsuDQmadSDFXpBANamRo2LyxE04', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiYzRrS2VwT2RQR2ZnUjVlYlJRWFVrOURnMEZ2MnhDWFRIOGZ2RmRqRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQvYWRtaW5wb3N0cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkZmVSRjZqSnRTcWF2d1dYT0xYUGV3TzRrd28ycUFDUlVrMkxpdEJNUkNDMnR5NGtaNGpwcmEiO30=', 1690800840);
 
 -- --------------------------------------------------------
 
@@ -386,7 +388,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -410,7 +412,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -422,7 +424,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `reader-emails`
