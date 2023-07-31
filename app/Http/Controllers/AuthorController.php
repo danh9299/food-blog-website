@@ -40,7 +40,7 @@ class AuthorController extends Controller
         
          
             'username' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:authors,email',
         ]);
         $author = new Author;
         $author->author_id = $request->author_id;

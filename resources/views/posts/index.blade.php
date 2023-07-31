@@ -29,7 +29,6 @@
                                 <h3 class="author name" style="--width: 100; --height: 100; background-color:white;">
                                     <a href="#" class="card-title hover:underline">
                                         <strong>{{ $row->author->username }}</strong></a>
-
                                 </h3>
                             </li>
 

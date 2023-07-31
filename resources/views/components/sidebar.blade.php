@@ -12,7 +12,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item bg-light h4">Quản Lý Bài Viết</li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black"href="{{ route('adminposts.index') }}">Xem danh sách bài viết</a></li>
-                <li class="list-group-item bg-light">Thêm bài viết mới</li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black"href="{{ route('posts.create') }}">Thêm bài viết mới</a></li>
             </ul>
             <hr>
             
@@ -30,6 +30,14 @@
                 <li class="list-group-item bg-light h4">Quản Lý Hình Ảnh</li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('adminimages.showAll') }}">Thư viện hình ảnh</a></li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('adminimages.uploadImage') }}">Thêm hình ảnh mới</a></li>
+            </ul>
+            <hr>
+        </li>
+        <li class="nav-item">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light h4">Quản Lý Đăng Ký</li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('reader-emails.index') }}">Emails của độc giả</a></li>
+    
             </ul>
             <hr>
         </li>

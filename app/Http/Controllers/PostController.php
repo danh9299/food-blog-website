@@ -140,6 +140,10 @@ class PostController extends Controller
         return redirect()->route('adminposts.index')->with('success', 'Xóa thành công');
     }
     
-
+    public function showListRecentPosts(){
+        $posts = Post::all();
+       
+        return view('posts.list-recent-posts',['posts' => $posts]);
+    }
    
 }

@@ -6,6 +6,7 @@ use App\HTTP\Controllers\AdminPost;
 use App\HTTP\Controllers\AuthorController;
 use App\HTTP\Controllers\CommentController;
 use App\HTTP\Controllers\ImageController;
+use App\HTTP\Controllers\EmailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,11 +22,17 @@ use App\HTTP\Controllers\ImageController;
 // Client pages
 Route::resource('/posts', PostController::class);
 Route::resource('/', PostController::class);
-
+Route::resource('/home', PostController::class);
+Route::get('/list-recent-posts', [PostController::class,'showListRecentPosts'])->name('posts.list-recent-posts');
 // Access admin page
 Route::get('admin',function(){
     return view('admin');
 });
+
+//Email subscribe for users
+Route::get('/subscribe',[EmailController::class,'store'])->name('reader-emails.store');
+
+
 
 
 // Authentication
@@ -61,5 +68,12 @@ Route::middleware([
     Route::delete('admin/dashboard/adminauthors/{author}/confirmDelete', [AuthorController::class, 'destroy'])->name('adminauthors.destroy');
     Route::get('admin/dashboard/adminauthors/{author}/check', [AuthorController::class, 'check'])->name('adminauthors.check');
     Route::put('admin/dashboard/adminauthors/{author}/update', [AuthorController::class, 'update'])->name('adminauthors.update');
+
+    // Route for reader Email in admin
+    Route::get('admin/dashboard/reader-emails/',[EmailController::class,'index'])->name('reader-emails.index');
+   
+    Route::get('admin/dashboard/reader-emails/{email}/confirm',[EmailController::class,'confirm'])->name('reader-emails.confirm');
+    Route::delete('admin/dashboard/reader-emails/{email}/confirmDelete', [EmailController::class, 'destroy'])->name('reader-emails.destroy');
+    
 });
 

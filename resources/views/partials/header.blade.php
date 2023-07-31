@@ -14,37 +14,19 @@
              <ul class="navbar-list">
 
                  <li class="navbar-item">
-                     <a href="#" class="navbar-link hover:underline" data-nav-link>Trang chủ</a>
+                     <a href="{{route('posts.index')}}" class="navbar-link hover:underline" data-nav-link>Trang chủ</a>
                  </li>
 
                  <li class="navbar-item">
-                     <a href="#" class="navbar-link hover:underline" data-nav-link>Bài viết gần đây</a>
+                     <a href="{{route('posts.list-recent-posts')}}" class="navbar-link hover:underline" data-nav-link>Bài viết gần đây</a>
                  </li>
 
-                 <li class="navbar-item">
-                     <a href="#" class="navbar-link hover:underline" data-nav-link>Thành viên</a>
-                 </li>
+                
 
              </ul>
          </nav>
 
-         <div class="wrapper">
-
-             <button class="search-btn" aria-label="search" data-search-toggler>
-                 <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-
-                 <span class="span">Tìm kiếm</span>
-             </button>
-
-             <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
-                 <span class="span one"></span>
-                 <span class="span two"></span>
-                 <span class="span three"></span>
-             </button>
-
-             <a href="#" class="btn">Tham gia</a>
-
-         </div>
+       
 
      </div>
  </header>

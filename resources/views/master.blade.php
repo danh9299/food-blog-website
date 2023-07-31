@@ -10,7 +10,7 @@
     - primary meta tags
   -->
     <title>Home</title>
-    
+
     <meta name="title" content="Home.">
     <meta name="description" content="This is a blog for sharing food">
 
@@ -30,11 +30,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <!--Logo website-->
-    <link rel="icon" type="image" href="{{asset('assets/images/logo.jpg')}}"/> 
-  
-  
-  </head>
+    <!--Logo website-->
+    <link rel="icon" type="image" href="{{asset('assets/images/logo.jpg')}}" />
+
+
+</head>
 
 <body>
 
@@ -57,20 +57,28 @@
                         <strong class="strong">Xin chào!</strong> Chúng tớ chia sẻ công thức nấu ăn ở đây.
                     </h1>
 
+
                     <div class="wrapper">
 
-                        <form action="" class="newsletter-form">
-                            <input type="email" name="email_address" placeholder="Email của cậu" class="email-field">
+                        <form action="{{route('reader-emails.store')}}" class="newsletter-form">
+                            <input type="email" name="email" placeholder="Email của cậu" class="email-field">
 
                             <button type="submit" class="btn">Subscribe</button>
                         </form>
 
                         <p class="newsletter-text">
-                            Subsribe để nhận những thông báo về bài viết mới nhất của chúng tớ.
+                            Subscribe để nhận những thông báo về bài viết mới nhất của chúng tớ.
                         </p>
 
                     </div>
+                    @if($message = Session::get('success'))
 
+                    <div class="alert alert-success">
+                        <h1 style="color:red">
+                            {{ $message }}
+                        </h1>
+                    </div>
+                    @endif
                 </div>
             </section>
 
@@ -83,19 +91,6 @@
           
       -->
             @yield('content')
-
-
-
-
-
-
-
-
-
-
-
-
-
             <!-- 
         - #NEWSLETTER
       -->
@@ -106,12 +101,19 @@
                     Nhập email để <strong class="strong">nhận được các bài viết mới nhất</strong>
                 </h2>
 
-                <form action="" class="newsletter-form">
-                    <input type="email" name="email_address" placeholder="Email của cậu" required class="email-field">
+                <form action="{{route('reader-emails.store')}}" class="newsletter-form">
+                    <input type="email" name="email" placeholder="Email của cậu" required class="email-field">
 
                     <button type="submit" class="btn">Subscribe</button>
                 </form>
+                @if($message = Session::get('success'))
 
+                <div class="alert alert-success">
+                    <h1 style="color:red">
+                        {{ $message }}
+                    </h1>
+                </div>
+                @endif
             </section>
 
         </article>
@@ -138,7 +140,7 @@
   -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-   
+
 </body>
 
 </html>
