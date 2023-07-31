@@ -9,7 +9,7 @@
 
             <div class="footer-brand">
 
-                <a href="#" class="logo">
+                <a href="{{route('posts.index')}}" class="logo">
                     <img src="{{asset('assets/images/logo.jpg')}}" width="150" height="150" alt="Blog logo">
                 </a>
 
@@ -61,7 +61,7 @@
                 </li>
 
                 <li>
-                    <a href="#" class="footer-link hover:underline">404</a>
+                    <a href="{{route('404.info')}}" class="footer-link hover:underline">404</a>
                 </li>
 
                 <li>
@@ -78,7 +78,7 @@
 
             <p class="copyright">
                 &copy;
-                <a href="#" class="copyright-link hover:underline">Developed by: nguyenduyanh.tit@gmail.com</a>
+                <a href="mailto:nguyenduyanh.tit@gmail.com" class="copyright-link hover:underline">Developed by: nguyenduyanh.tit@gmail.com</a>
             </p>
 
         </div>

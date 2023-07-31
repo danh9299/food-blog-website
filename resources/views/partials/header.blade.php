@@ -5,7 +5,7 @@
  <header class="header section" data-header>
      <div class="container">
 
-         <a href="/home" class="logo">
+         <a href="{{route('posts.index')}}" class="logo">
              <img src="{{asset('assets/images/logo.jpg')}}" width="250" height="250" alt="logo">
 
          </a>

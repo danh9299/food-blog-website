@@ -1,3 +1,26 @@
+
+
+<style>
+    /* Set a maximum height for the sidebar */
+.sidebar {
+    max-height: 700px; /* Adjust this height as per your requirements */
+    overflow-y: auto;
+}
+/* Customize scrollbar For WebKit (Chrome, Safari, Edge) */
+.sidebar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+    </style>
 <!-- Sidebar -->
 <div class="sidebar">
     <ul class="nav flex-column">
@@ -38,6 +61,17 @@
                 <li class="list-group-item bg-light h4">Quản Lý Đăng Ký</li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('reader-emails.index') }}">Emails của độc giả</a></li>
     
+            </ul>
+            <hr>
+        </li>
+        <li class="nav-item">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light h4">Thiết lập Footer</li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">Mạng xã hội</a></li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">About us</a></li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">Liên hệ</a></li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">404</a></li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">Chính sách bảo mật</a></li>
             </ul>
             <hr>
         </li>

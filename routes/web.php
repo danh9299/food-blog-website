@@ -32,7 +32,10 @@ Route::get('admin',function(){
 //Email subscribe for users
 Route::get('/subscribe',[EmailController::class,'store'])->name('reader-emails.store');
 
-
+//404 page
+Route::get('/404',function(){
+    return view('404');
+})->name('404.info');
 
 
 // Authentication

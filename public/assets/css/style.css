@@ -1115,3 +1115,33 @@ img:hover{
   .table td:nth-child(4) {
     width: 8%; /* Ví dụ: Kéo dài ô thứ hai thành 30% chiều rộng của bảng */
   }
+
+
+/*404 page*/
+.error-page {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.error-code {
+  font-size: 64px;
+  font-weight: bold;
+  color: #f00;
+}
+
+.error-message {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.error-description {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+
+
+.back-to-home:hover {
+  background-color: #0056b3;
+}
