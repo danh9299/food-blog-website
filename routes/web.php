@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\HTTP\Controllers\PostController;
 use App\HTTP\Controllers\AdminPost;
 use App\HTTP\Controllers\AuthorController;
-use App\HTTP\Controllers\CommentController;
+
 use App\HTTP\Controllers\ImageController;
 use App\HTTP\Controllers\EmailController;
+use App\HTTP\Controllers\SocialNetworkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,9 @@ Route::resource('/posts', PostController::class);
 Route::resource('/', PostController::class);
 Route::resource('/home', PostController::class);
 Route::get('/list-recent-posts', [PostController::class,'showListRecentPosts'])->name('posts.list-recent-posts');
+
+// Route cho partials/footer nằm trong AppServiceProvider, function boot
+
 // Access admin page
 Route::get('admin',function(){
     return view('admin');
@@ -78,5 +82,10 @@ Route::middleware([
     Route::get('admin/dashboard/reader-emails/{email}/confirm',[EmailController::class,'confirm'])->name('reader-emails.confirm');
     Route::delete('admin/dashboard/reader-emails/{email}/confirmDelete', [EmailController::class, 'destroy'])->name('reader-emails.destroy');
     
+
+     // Route for Social Network in admin
+     Route::get('admin/dashboard/socialnetwork/',[SocialNetworkController::class,'index'])->name('socialnetwork.index');
+     Route::get('admin/dashboard/socialnetwork/{socialnetwork}/edit',[SocialNetworkController::class,'edit'])->name('socialnetwork.edit');
+     Route::put('admin/dashboard/socialnetwork/{socialnetwork}/updateSocialNetwork',[SocialNetworkController::class,'update'])->name('socialnetwork.update');
 });
 

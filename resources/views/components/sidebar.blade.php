@@ -67,7 +67,7 @@
         <li class="nav-item">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item bg-light h4">Thiết lập Footer</li>
-                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">Mạng xã hội</a></li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('socialnetwork.index') }}">Mạng xã hội</a></li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">About us</a></li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">Liên hệ</a></li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">404</a></li>

@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\HTTP\Controllers\SocialNetworkController;
+use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $socialNetworkController = new SocialNetworkController();
+        $socialnetwork = $socialNetworkController->toHomeFooter();
+        
+        View::share('socialnetwork', $socialnetwork);
     }
 }

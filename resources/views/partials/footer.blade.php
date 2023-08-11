@@ -20,7 +20,7 @@
             </div>
 
             <ul class="footer-list">
-
+                
                 <li>
                     <p class="h5">Mạng xã hội</p>
                 </li>
@@ -28,20 +28,20 @@
                 <li class="footer-list-item">
                     <ion-icon name="logo-facebook"></ion-icon>
 
-                    <a href="https://www.facebook.com/nguyen.duyanh.12345/" target="_blank" class="footer-link hover:underline">Facebook</a>
+                    <a href="{{$socialnetwork->Facebook}}" target="_blank" class="footer-link hover:underline">Facebook</a>
                 </li>
 
 
                 <li class="footer-list-item">
                     <ion-icon name="logo-github"></ion-icon>
 
-                    <a href="https://github.com/danh9299" target="_blank" class="footer-link hover:underline">Github</a>
+                    <a href="{{$socialnetwork->Github}}" target="_blank" class="footer-link hover:underline">Github</a>
                 </li>
 
                 <li class="footer-list-item">
                     <ion-icon name="logo-instagram"></ion-icon>
 
-                    <a href="https://www.instagram.com/d_anh92" target="_blank" class="footer-link hover:underline">Instagram</a>
+                    <a href="{{$socialnetwork->Instagram}}" target="_blank" class="footer-link hover:underline">Instagram</a>
                 </li>
 
             </ul>
