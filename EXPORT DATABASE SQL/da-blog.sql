@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2023 at 12:32 PM
+-- Generation Time: Aug 11, 2023 at 05:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `da-blog`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aboutus`
+--
+
+CREATE TABLE `aboutus` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `aboutus`
+--
+
+INSERT INTO `aboutus` (`id`, `content`, `created_at`, `updated_at`) VALUES
+(1, 'Chúng tớ là Food Blogger By Duy Anh. Trang web được tạo bởi Nguyễn Duy Anh, với mục đích là xây dựng một cộng đồng, nơi mọi người có thể chia sẻ các công thức nấu ăn đơn giản. Trang web được tạo năm 2023, và sẽ tiếp tục được xây dựng, củng cố thêm nhiều nữa. Các bạn hãy ủng hộ chúng tớ nhé!', NULL, '2023-08-11 07:29:31');
 
 -- --------------------------------------------------------
 
@@ -43,11 +63,33 @@ INSERT INTO `authors` (`author_id`, `username`, `email`, `created_at`, `updated_
 (0, 'Không rõ tác giả', 'unknown@unknown', '2023-07-29 06:53:10', '2023-07-29 06:53:10'),
 (3, 'Obama', 'obama@gmail.us', '2023-07-29 05:54:07', '2023-07-29 05:54:07'),
 (4, 'Trương Mỹ Huyền', 'myhuyentruong@gmail.com', '2023-07-29 05:56:08', '2023-07-29 05:56:08'),
-(5, 'Tường Ly', 'maituongly@gmail.com', '2023-07-29 05:57:53', '2023-07-29 05:57:53'),
+(5, 'Mai Tường Ly', 'maituongly@gmail.com', '2023-07-29 05:57:53', '2023-08-11 07:57:45'),
 (10, 'Kiều Dũng', 'ktdzung@gmail.com', '2023-07-29 06:52:14', '2023-07-29 06:52:14'),
 (12, 'Phạm Hương Giang', 'phmgiangibdneu@gmail.com', '2023-07-29 06:54:11', '2023-07-29 06:54:11'),
 (13, 'Duy Anh', 'nguyenduyanh.tit@gmail.com', '2023-07-31 03:10:27', '2023-07-31 03:10:27'),
 (15, 'Quang Hải', 'footballplayer.quanghai@gmail.com', '2023-07-31 03:46:41', '2023-07-31 03:46:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `address` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `address`, `email`, `telephone`, `created_at`, `updated_at`) VALUES
+(1, '53 An Trạch 1, phường Quốc Tử Giám, quận Đống Đa, thành phố Hà Nội', 'nguyenduyanh.tit@gmail.com', '0336775479', NULL, '2023-08-11 07:55:57');
 
 -- --------------------------------------------------------
 
@@ -135,7 +177,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (26, '2023_07_31_093334_create_emails', 15),
 (27, '2023_07_31_105439_update_table_nullable_columns', 16),
 (28, '2023_07_31_110142_drop_comments_table', 17),
-(29, '2023_08_11_083833_create_social_network_table', 18);
+(29, '2023_08_11_083833_create_social_network_table', 18),
+(30, '2023_08_11_133632_create_table_aboutus', 19),
+(33, '2023_08_11_133646_create_table__contact', 20),
+(34, '2023_08_11_133708_create_table__privacy_policy', 21);
 
 -- --------------------------------------------------------
 
@@ -174,6 +219,26 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `policy`
+--
+
+CREATE TABLE `policy` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `policy` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `policy`
+--
+
+INSERT INTO `policy` (`id`, `policy`, `created_at`, `updated_at`) VALUES
+(1, 'Chúng tôi cam kết bảo mật thông tin độc giả. Mọi email hoặc thông tin cá nhân bạn cung cấp sẽ được bảo lưu và không cung cấp cho bất kì một bên thứ 3 nào khác. Chúng tôi hiểu và tôn trọng quyền riêng tư của mỗi cá nhân tham gia trên trang website này. Tài khoản đăng kí của mỗi thành viên đều được mã hóa tự động.', NULL, '2023-08-11 08:17:22');
 
 -- --------------------------------------------------------
 
@@ -230,7 +295,8 @@ INSERT INTO `reader-emails` (`id`, `email`, `created_at`, `updated_at`) VALUES
 (8, 'hello@abc', '2023-07-31 03:25:40', '2023-07-31 03:25:40'),
 (9, 'maituongly@gmail.com', '2023-07-31 03:26:03', '2023-07-31 03:26:03'),
 (10, 'duyduyduyanhanhanhanh@gmail.com', '2023-07-31 03:26:49', '2023-07-31 03:26:49'),
-(11, 'maituongly@xn--gmadil-rta.com', '2023-07-31 03:27:51', '2023-07-31 03:27:51');
+(11, 'maituongly@xn--gmadil-rta.com', '2023-07-31 03:27:51', '2023-07-31 03:27:51'),
+(15, 'helloworldIamgay@ab', '2023-08-11 08:18:08', '2023-08-11 08:18:08');
 
 -- --------------------------------------------------------
 
@@ -252,7 +318,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('rTe7gCWPmXvHH6cQULPf0ObGdPXpDSeoWojoYIyN', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMUVkSG50elA0Z05ZNTdjTU83Z0VJNGthODJ3TmJ3dTR2YlNsbWt5cyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQvc29jaWFsbmV0d29yay8xL2VkaXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRmZVJGNmpKdFNxYXZ3V1hPTFhQZXdPNGt3bzJxQUNSVWsyTGl0Qk1SQ0MydHk0a1o0anByYSI7fQ==', 1691749835);
+('T0hOWtWXfEJwnO9IlLccXrNwGQGbYWrdCejZzShu', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVE1tNDJsUjZZSmQ5ZHVpTG5OQ2ZrOUl6MnpnTm9oWWtTdjZ3aEZkdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQvYWRtaW5wb3N0cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGZlUkY2akp0U3FhdndXWE9MWFBld080a3dvMnFBQ1JVazJMaXRCTVJDQzJ0eTRrWjRqcHJhIjt9', 1691767123);
 
 -- --------------------------------------------------------
 
@@ -310,11 +376,24 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tw
 --
 
 --
+-- Indexes for table `aboutus`
+--
+ALTER TABLE `aboutus`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `authors`
 --
 ALTER TABLE `authors`
   ADD PRIMARY KEY (`author_id`),
   ADD UNIQUE KEY `authors_email_unique` (`email`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `contact_email_unique` (`email`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -348,6 +427,12 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `policy`
+--
+ALTER TABLE `policy`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `posts`
@@ -390,10 +475,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `aboutus`
+--
+ALTER TABLE `aboutus`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
   MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -411,13 +508,19 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `policy`
+--
+ALTER TABLE `policy`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -429,7 +532,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `reader-emails`
 --
 ALTER TABLE `reader-emails`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `social_network`
