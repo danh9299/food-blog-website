@@ -22,7 +22,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $socialNetworkController = new SocialNetworkController();
         $socialnetwork = $socialNetworkController->toHomeFooter();
-        
         View::share('socialnetwork', $socialnetwork);
     }
 }

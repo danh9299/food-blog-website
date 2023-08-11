@@ -68,9 +68,8 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item bg-light h4">Thiết lập Footer</li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('socialnetwork.index') }}">Mạng xã hội</a></li>
-                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">About us</a></li>
-                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">Liên hệ</a></li>
-                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">404</a></li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('aboutus.edit') }}">About us</a></li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('contact.edit') }}">Liên hệ</a></li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">Chính sách bảo mật</a></li>
             </ul>
             <hr>

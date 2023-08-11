@@ -53,11 +53,11 @@
                 </li>
 
                 <li>
-                    <a href="#" class="footer-link hover:underline">Blog</a>
+                    <a href="{{route('aboutus.index')}}" class="footer-link hover:underline">Blog</a>
                 </li>
 
                 <li>
-                    <a href="#" class="footer-link hover:underline">Liên hệ</a>
+                    <a href="{{route('contact.index')}}" class="footer-link hover:underline">Liên hệ</a>
                 </li>
 
                 <li>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\HTTP\Controllers\PostController;
 use App\HTTP\Controllers\AdminPost;
@@ -41,6 +43,12 @@ Route::get('/404',function(){
     return view('404');
 })->name('404.info');
 
+
+//About Us
+Route::get('/about-us',[AboutUsController::class,'index'])->name('aboutus.index');
+
+// Contact
+Route::get('/contact',[ContactController::class,'index'])->name('contact.index');
 
 // Authentication
 Route::middleware([
@@ -87,5 +95,15 @@ Route::middleware([
      Route::get('admin/dashboard/socialnetwork/',[SocialNetworkController::class,'index'])->name('socialnetwork.index');
      Route::get('admin/dashboard/socialnetwork/{socialnetwork}/edit',[SocialNetworkController::class,'edit'])->name('socialnetwork.edit');
      Route::put('admin/dashboard/socialnetwork/{socialnetwork}/updateSocialNetwork',[SocialNetworkController::class,'update'])->name('socialnetwork.update');
-});
+
+
+     //Route for About Us in admin
+     Route::get('admin/dashboard/about-us/edit',[AboutUsController::class,'edit'])->name('aboutus.edit');
+     Route::put('admin/dashboard/about-us/{aboutus_info}/update',[AboutUsController::class,'update'])->name('aboutus.update');
+
+     //Route for About Us in admin
+     Route::get('admin/dashboard/contact/edit',[ContactController::class,'edit'])->name('contact.edit');
+     Route::put('admin/dashboard/contact/{contact}/update',[ContactController::class,'update'])->name('contact.update');
+
+    });
 

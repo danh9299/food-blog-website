@@ -74,7 +74,7 @@
             </div>
             <div class="text-center">
                 <input type="hidden" name="hidden_id" value="{{ $post->post_id }}" />
-                <input type="submit" class="btn btn-primary" value="Edit" />
+                <input type="submit" class="btn btn-primary" value="Cập Nhật" />
             </div>
         </form>
     </div>
