@@ -70,7 +70,7 @@
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('socialnetwork.index') }}">Mạng xã hội</a></li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('aboutus.edit') }}">About us</a></li>
                 <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('contact.edit') }}">Liên hệ</a></li>
-                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="#">Chính sách bảo mật</a></li>
+                <li class="list-group-item bg-light"><a style="text-decoration:none; color:black" href="{{ route('policy.edit') }}">Chính sách bảo mật</a></li>
             </ul>
             <hr>
         </li>

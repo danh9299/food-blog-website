@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PolicyController;
 use Illuminate\Support\Facades\Route;
 use App\HTTP\Controllers\PostController;
 use App\HTTP\Controllers\AdminPost;
@@ -49,6 +50,11 @@ Route::get('/about-us',[AboutUsController::class,'index'])->name('aboutus.index'
 
 // Contact
 Route::get('/contact',[ContactController::class,'index'])->name('contact.index');
+
+
+// Policy
+Route::get('/policy',[PolicyController::class,'index'])->name('policy.index');
+
 
 // Authentication
 Route::middleware([
@@ -104,6 +110,10 @@ Route::middleware([
      //Route for About Us in admin
      Route::get('admin/dashboard/contact/edit',[ContactController::class,'edit'])->name('contact.edit');
      Route::put('admin/dashboard/contact/{contact}/update',[ContactController::class,'update'])->name('contact.update');
+
+     //Route for Policy in admin
+     Route::get('admin/dashboard/policy/edit',[PolicyController::class,'edit'])->name('policy.edit');
+     Route::put('admin/dashboard/policy/{policy}/update',[PolicyController::class,'update'])->name('policy.update');
 
     });
 

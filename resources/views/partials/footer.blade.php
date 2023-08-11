@@ -60,12 +60,10 @@
                     <a href="{{route('contact.index')}}" class="footer-link hover:underline">Liên hệ</a>
                 </li>
 
-                <li>
-                    <a href="{{route('404.info')}}" class="footer-link hover:underline">404</a>
-                </li>
+               
 
                 <li>
-                    <a href="#" class="footer-link hover:underline">Chính sách bảo mật</a>
+                    <a href="{{route('policy.index')}}" class="footer-link hover:underline">Chính sách bảo mật</a>
                 </li>
 
             </ul>
